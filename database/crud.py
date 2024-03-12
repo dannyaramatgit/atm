@@ -1,8 +1,9 @@
 from sqlalchemy.orm import Session
 from fastapi import Depends
-
 from database.models import Cash
 from database.database import get_db
+import logging
+logger = logging.getLogger(__name__)
 
 
 def get_bill_by_val(db: Session, val: int):
@@ -18,13 +19,5 @@ def add_funds(db: Session, cash: Cash):
         db.add(cash)
         db.commit()
     except Exception as e:
-        print(e)
-        raise e
-
-
-def update_funds(db: Session, cash: Cash):
-    try:
-        db.commit()
-    except Exception as e:
-        print(e)
+        logger.error(e)
         raise e

@@ -2,7 +2,7 @@ import logging
 from fastapi import APIRouter, status, HTTPException
 import exceptions
 from com_models import response_models
-import backend
+import backend.atm as atm
 from com_models import request_models
 from database.database import init_db
 
@@ -23,7 +23,7 @@ def validate_amount(amount):
 def withdrawal(amount: float):
     try:
         validate_amount(amount)
-        return backend.withdrawal(amount=amount)
+        return atm.withdrawal(amount=amount)
     except exceptions.MaxAmountException as e:
         logger.error(e)
         raise HTTPException(status_code=422)
@@ -44,7 +44,7 @@ def withdrawal(amount: float):
 @router.post("/refill", status_code=status.HTTP_200_OK)
 def refill(refill: request_models.Refill):
     try:
-        return backend.refill(refill_data=refill.dict())
+        return atm.refill(refill_data=refill.dict())
     except exceptions.IlleagalMoneyException as e:
         logger.error(e)
         raise HTTPException(status_code=422)
