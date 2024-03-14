@@ -1,19 +1,21 @@
 Simple ATM backend
 
-1. please install dependencies by running this from main folder:
-   pip install -r requirements.txt
+1. please nevigate to the app's main folder and run command:
+   **docker-compose up -d**
+2. navigate to **http://localhost:8000/docs**
 
-3. choose db engine
-   if sqlite, no changes needed
-   if postgress, change connection string to postgres data in database.py switch SQLALCHEMY_DATABASE_URL parameter
+if not loading please run :
+**docker-compose down**
+and
+**docker-compose up -d**
+again
 
-4. run the app by running from main folder:
-   uvicorn main:app --reload
 
 available actions:
 1. withdrawal
    ex: get request - localhost:8000/atm/withdrawal/?amount=370
-3. refill
+   
+2. refill
    ex: post request - localhost:8000/atm/refill/
    with request body:
    {
