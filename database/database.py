@@ -7,16 +7,16 @@ from database.models import Cash, Base
 
 logger = logging.getLogger(__name__)
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+# SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 
-# SQLALCHEMY_DATABASE_URL = URL.create(
-#     drivername="postgresql",
-#     username="postgres",
-#     password="admin123",
-#     host="localhost",
-#     database="postgres",
-#     port=5432
-# )
+SQLALCHEMY_DATABASE_URL = URL.create(
+    drivername="postgresql",
+    username="postgres",
+    password="admin123",
+    host="db",
+    database="postgres",
+    port=5432
+)
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
